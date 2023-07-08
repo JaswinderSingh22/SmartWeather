@@ -7,8 +7,8 @@
         <div class="">
           <p class="text-xl font-bold">Temperature: {{ weatherData.current.temp }}°C</p>
           <p class="text-lg font-bold">Feels Like: {{ weatherData.current.feels_like }}°C</p>
-          <p class="text-lg font-bold">Sunrise: {{ weatherData.current.sunrise }}°C</p>
-          <p class="text-lg font-bold">Sunset: {{ weatherData.current.sunset }}°C</p>
+          <p class="text-lg font-bold">Sunrise: {{ formattedTime(weatherData.current.sunrise) }}</p>
+          <p class="text-lg font-bold">Sunset: {{ formattedTime(weatherData.current.sunset) }}</p>
           <p class="text-lg font-bold">Condition: {{ weatherData.current.weather[0].description }}</p>
           <p class="text-lg font-bold">Pressure: {{ weatherData.current.pressure }}</p>
           <p class="text-lg font-bold">Clouds: {{ weatherData.current.clouds }}</p>
@@ -26,23 +26,38 @@
   </template>
   
   <script>
-  import { computed, onMounted } from 'vue';
+  import { computed, onMounted, watch } from 'vue';
   import { useStore } from 'vuex';
   
   export default {
     name: 'WeatherDisplay',
     setup() {
       const store = useStore();
-  
+      const formattedTime = (timestamp) => {
+          const date = new Date(timestamp * 1000); // Convert timestamp to milliseconds
+          const hours = date.getHours();
+          const minutes = date.getMinutes();
+          const seconds = date.getSeconds();
+        return`${hours}:${minutes}:${seconds}`;
+      };
+
       const selectedCity = computed(() => store.state.selectedCity);
       const getWeatherIcon = computed(() => store.getters['getWeatherIcon']);
       const weatherData = computed(() => store.state.weatherData);
+        watch(selectedCity, (newSelectedCity) => {
+        if (newSelectedCity !== null) {
+          // Fetch weather data and forecast data based on the selected city
+          store.dispatch('fetchWeatherData');
+          store.dispatch('fetchForecastData');
+          
+        }
+    });
 
-      onMounted(() => {
+    onMounted(() => {
       store.dispatch('fetchWeatherData');
     });
   
-      return { selectedCity, weatherData,getWeatherIcon };
+      return { selectedCity, weatherData,getWeatherIcon, formattedTime };
     },
   };
   </script>

@@ -4,12 +4,10 @@
         <input v-model="searchQuery" @input="fetchResults" placeholder="Enter city or country"
              class="py-2 px-4 border border-gray-200 rounded-lg  w-full min-w-fit">
       </div>
-      {{ results.length }}
       <ul v-if="results.length"
           class="absolute z-10 mt-10 w-6/12 bg-grey rounded-md shadow-lg overflow-hidden">
         <li v-for="result in results" :key="result.id" @click="selectResult(result)"
             class="py-2 cursor-pointer bg-blue-200 hover:bg-blue-300">{{ result.name }}, {{ result.country }}</li>
-      {{ results }}
 
       </ul>
     </div>
@@ -37,7 +35,6 @@
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        console.log("response:", data);
         if (data.status === 'OK') {
           results.value = data.results.map((result) => {
             return {
@@ -55,14 +52,13 @@
         }
       }
       catch (error) {
-        console.error('Error fetching search results:', error);
         results.value = [];
       }
     };
   
     const selectResult = (result) => {
       store.commit('selectCity', result);
-      results.value = [];
+      // results.value = [];
     };
 
   // Close dropdown when clicking outside
