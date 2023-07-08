@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center">
       <div class="relative w-6/12">
-        <input v-model="searchQuery" @input="fetchResults" placeholder="Enter city or country"
+        <input v-model="searchQuery" @input="fetchResults" placeholder="Enter city or country" @keyup.enter="selectResult(results[0])"
              class="py-2 px-4 border border-gray-200 rounded-lg  w-full min-w-fit">
       </div>
       <ul v-if="results.length"
@@ -58,7 +58,7 @@
   
     const selectResult = (result) => {
       store.commit('selectCity', result);
-      // results.value = [];
+      results.value = [];
     };
 
   // Close dropdown when clicking outside
