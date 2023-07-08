@@ -30,9 +30,14 @@
 
       const getWeatherIcon = computed(() => store.getters['getWeatherIcon']);
       const forecastData = computed(() => store.state.forecastData);
+
+      // Fetch forecast data on component mount
+
       onMounted(() => {
       store.dispatch('fetchForecastData');
     });
+
+    // Format timestamp to a readable date format
 
     const formatDate = (timestamp) => {
       const date = new Date(timestamp * 1000);
@@ -71,11 +76,15 @@
 
 }
 
+/* Adjustments for smaller screens */
+
 @media (max-width: 640px) {
   .forecast-card {
     max-width: 100%;
   }
 }
+
+/* Adjustments for larger screens */
 
 @media (min-width: 768px) {
   .grid-cols-7 {

@@ -44,18 +44,23 @@
         return`${hours}:${minutes}:${seconds}`;
       };
 
-      const selectedCity = computed(() => store.state.selectedCity);
-      const getWeatherIcon = computed(() => store.getters['getWeatherIcon']);
-      const weatherData = computed(() => store.state.weatherData);
-        watch(selectedCity, (newSelectedCity) => {
-        if (newSelectedCity !== null) {
-          // Fetch weather data and forecast data based on the selected city
-          store.dispatch('fetchWeatherData');
-          store.dispatch('fetchForecastData');
-          
-        }
+    const selectedCity = computed(() => store.state.selectedCity);
+    const getWeatherIcon = computed(() => store.getters['getWeatherIcon']);
+    const weatherData = computed(() => store.state.weatherData);
+
+  // Watch for changes in selectedCity and fetch weather data
+
+    watch(selectedCity, (newSelectedCity) => {
+    if (newSelectedCity !== null) {
+      // Fetch weather data and forecast data based on the selected city
+      store.dispatch('fetchWeatherData');
+      store.dispatch('fetchForecastData');
+      
+    }
     });
 
+    // Fetch weather data on component mount
+    
     onMounted(() => {
       store.dispatch('fetchWeatherData');
     });

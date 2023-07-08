@@ -2,14 +2,17 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    searchResults: [],
-    selectedCity: null,
-    weatherData: null,
-    forecastData: [],
-    latitude: null,
-    longitude: null,
+    // Store state variables
+    searchResults: [],  // Holds the search results
+    selectedCity: null,  // Holds the selected city
+    weatherData: null,   // Holds the weather data for the selected city
+    forecastData: [],  // Holds the forecast data for the selected city
+    latitude: null,   // Holds the latitude of the selected city
+    longitude: null,   // Holds the longitude of the selected city
   },
   mutations: {
+    // Store mutations to update state variables
+
     updateSearchResults(state, results) {
       state.searchResults = results;
     },
@@ -20,9 +23,14 @@ const store = createStore({
       state.latitude = null;
       state.longitude = null;
     },
+
+    // Updates the weather data for the selected city
+
     updateWeatherData(state, data) {
       state.weatherData = data;
     },
+
+    // Updates the forecast data for the selected city
     updateForecastData(state, data) {
       state.forecastData = data;
     },
@@ -34,8 +42,11 @@ const store = createStore({
     }
   },
   actions: {
-    
+    // Store actions to perform asynchronous operations and update state
+
     async fetchWeatherData({ commit, state }) {
+      // Fetches weather data for the selected city
+
       if (state.selectedCity === null || !state.selectedCity.latitude || !state.selectedCity.longitude) {
         return;
       }
@@ -59,7 +70,6 @@ const store = createStore({
         return;
       }
 
-      // const Weather_apiKey = '8b4d68187405f7ea371f47ffd0bce287';
       const Weather_apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${state.selectedCity.latitude}&lon=${state.selectedCity.longitude}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`;
 
 
@@ -77,12 +87,13 @@ const store = createStore({
       }
     },
   },
-  getters:{
-    getWeatherIcon: () => (icon) => {
-      // Function logic to return the weather icon based on the icon code
-      // You can use the same logic as before
+  getters: {
+    
+    // Store getters to retrieve computed values from state
+    
+    // Function logic to return the weather icon based on the icon code
 
-      // Example implementation using Weather Icons from Google Fonts
+    getWeatherIcon: () => (icon) => {
       if (icon === '01d') {
       return 'wi wi-day-sunny';
       } else if (icon === '01n') {

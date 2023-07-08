@@ -23,7 +23,12 @@
       const searchQuery = ref('');
       const results = ref([]);
       const store = useStore();
-  
+
+
+      // Fetch search results based on searchQuery
+      // You can use a geocoding API to get location data
+      // Update the store with the search results using commit()
+
       const fetchResults = async () => {
       if (searchQuery.value.trim() === '') {
         results.value = [];
@@ -55,7 +60,11 @@
         results.value = [];
       }
     };
-  
+
+
+    // Select a search result and update the store with the selected city
+      // You can use commit() to update the store
+      
     const selectResult = (result) => {
       store.commit('selectCity', result);
       results.value = [];
