@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full flex flex-col">
     <WeatherHeader/>
     
     <SearchBar class="mt-5"/>

@@ -34,6 +34,7 @@ const store = createStore({
     }
   },
   actions: {
+    
     async fetchWeatherData({ commit, state }) {
       if (state.selectedCity === null || !state.selectedCity.latitude || !state.selectedCity.longitude) {
         return;
@@ -80,6 +81,40 @@ const store = createStore({
         console.error('Error fetching forecast data:', error);
         commit('updateForecastData', []);
       }
+    },
+  },
+  getters:{
+    getWeatherIcon: () => (icon) => {
+      console.log("icons:", icon);
+      // Function logic to return the weather icon based on the icon code
+      // You can use the same logic as before
+
+      // Example implementation using Weather Icons from Google Fonts
+      if (icon === '01d') {
+      return 'wi wi-day-sunny';
+    } else if (icon === '01n') {
+      return 'wi wi-night-clear';
+    } else if (icon === '02d') {
+      return 'wi wi-day-cloudy';
+    } else if (icon === '02n') {
+      return 'wi wi-night-cloudy';
+    } else if (icon === '03d' || icon === '03n') {
+      return 'wi wi-cloud';
+    } else if (icon === '04d' || icon === '04n') {
+      return 'wi wi-cloudy';
+    } else if (icon === '09d' || icon === '09n') {
+      return 'wi wi-showers';
+    } else if (icon === '10d' || icon === '10n') {
+      return 'wi wi-rain';
+    } else if (icon === '11d' || icon === '11n') {
+      return 'wi wi-thunderstorm';
+    } else if (icon === '13d' || icon === '13n') {
+      return 'wi wi-snow';
+    } else if (icon === '50d' || icon === '50n') {
+      return 'wi wi-fog';
+    }
+
+    return 'wi wi-na';
     },
   },
 });

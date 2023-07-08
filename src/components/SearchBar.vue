@@ -1,13 +1,16 @@
 <template>
     <div class="flex justify-center">
       <div class="relative w-6/12">
-      <input v-model="searchQuery" @input="fetchResults" placeholder="Enter city or country"
+        <input v-model="searchQuery" @input="fetchResults" placeholder="Enter city or country"
              class="py-2 px-4 border border-gray-200 rounded-lg  w-full min-w-fit">
-             </div>
+      </div>
+      {{ results.length }}
       <ul v-if="results.length"
           class="absolute z-10 mt-10 w-6/12 bg-grey rounded-md shadow-lg overflow-hidden">
         <li v-for="result in results" :key="result.id" @click="selectResult(result)"
-            class="py-2 cursor-pointer hover:bg-blue-100">{{ result.name }}, {{ result.country }}</li>
+            class="py-2 cursor-pointer bg-blue-200 hover:bg-blue-300">{{ result.name }}, {{ result.country }}</li>
+      {{ results }}
+
       </ul>
     </div>
   </template>
