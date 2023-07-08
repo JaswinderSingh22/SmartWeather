@@ -1,9 +1,9 @@
 <template>
-    <div class="flex flex-wrap justify-center">
-    <h2 class="text-2xl font-bold mb-4">7-Day Forecast</h2>
+    <div class="flex flex-wrap flex-col justify-center">
+    <h2 class="text-2xl font-bold mb-4">Forecast upcoming 7 days....</h2>
     <div v-if="forecastData.length > 0">
-      <ul>
-        <li v-for="forecast in forecastData" :key="forecast.dt" class="w-1/7 p-4 bg-gray-100 border border-gray-200 rounded-lg mr-4 mb-4">
+      <ul class="flex">
+        <li v-for="forecast in forecastData" :key="forecast.dt" class="w-1/7 flex flex-col p-4 bg-gray-100 border border-gray-200 rounded-lg mr-4 mb-4">
           <p >Date: {{ formatDate(forecast.dt) }}</p>
           <p>Temperature: {{ forecast.temp.day }}°C</p>
           <p>Feels Like: {{ forecast.feels_like.day }}°C</p>

@@ -11,6 +11,7 @@
   color: #2c3e50;
   margin: 0;
   padding: 0;
+  background: #b6dee9;
+  height: 971px;
 }
-
 </style>

@@ -2,7 +2,7 @@
     <div class="flex justify-center">
       <div class="relative w-6/12">
       <input v-model="searchQuery" @input="fetchResults" placeholder="Enter city or country"
-             class="py-2 px-4 border border-gray-200 rounded-lg  min-w-fit">
+             class="py-2 px-4 border border-gray-200 rounded-lg  w-full min-w-fit">
              </div>
       <ul v-if="results.length"
           class="absolute z-10 mt-10 w-6/12 bg-grey rounded-md shadow-lg overflow-hidden">

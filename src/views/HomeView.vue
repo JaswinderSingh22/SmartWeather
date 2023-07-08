@@ -1,6 +1,7 @@
 <template>
-  <div class="w-full">
+  <div class="w-full h-full">
     <WeatherHeader/>
+    
     <SearchBar class="mt-5"/>
     <WeatherDisplay v-if="$store.state.selectedCity" class="mt-4" />
     <WeatherForecast v-if="$store.state.selectedCity" class="mt-4 ml-4"/>
