@@ -39,8 +39,6 @@ const store = createStore({
         return;
       }
 
-      // const Weather_apiKey = '8b4d68187405f7ea371f47ffd0bce287';
-      // const Weather_apiUrl = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${state.selectedCity.latitude}&lon=${state.selectedCity.longitude}&appid=${Weather_apiKey}`;
       const Weather_apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${state.selectedCity.latitude}&lon=${state.selectedCity.longitude}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`;
 
       try {
