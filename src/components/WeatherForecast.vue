@@ -3,12 +3,11 @@
     <h2 class="text-xl font-bold mb-4">Forecast upcoming 7 days....</h2>
     <div v-if="forecastData.length > 0" class="overflow-auto">
       <ul class="flex">
-        <li v-for="forecast in forecastData" :key="forecast.dt" class="flex card flex-col items-center">
-          <p class="text-sm">Date: {{ formatDate(forecast.dt) }}</p>
+        <li v-for="forecast in forecastData" :key="forecast.dt" class="flex card flex-col justify-between	 items-center">
+          <p class="text-sm">{{ formatDate(forecast.dt) }}</p>
           <p>Temperature: {{ forecast.temp.day }}°C</p>
           <p class="font-bold">Feels Like: {{ forecast.feels_like.day }}°C</p>
           <p class="text-sm">Condition: {{ forecast.weather[0].description }}</p>
-          {{ forecast.weather[0].icon }}
           <i :class="[getWeatherIcon(forecast.weather[0].icon), 'text-3xl']"></i>
         </li>
       </ul>
@@ -27,6 +26,8 @@
     name: 'WeatherForecast',
     setup() {
       const store = useStore();
+      const backgroundImage = require('@/imgs/SVTk.gif');
+
       const getWeatherIcon = computed(() => store.getters['getWeatherIcon']);
       const forecastData = computed(() => store.state.forecastData);
       onMounted(() => {
@@ -38,32 +39,9 @@
       return date.toLocaleDateString();
     };
 
-    // // Map weather icon code to the appropriate icon class
-    // const getWeatherIcon = (iconCode) => {
-    //   switch (iconCode) {
-    //     case '01d':
-    //       return 'wi wi-day-sunny';
-    //     case '02d':
-    //       return 'wi wi-day-cloudy';
-    //     case '03d':
-    //     case '04d':
-    //       return 'wi wi-cloud';
-    //     case '09d':
-    //       return 'wi wi-day-showers';
-    //     case '10d':
-    //       return 'wi wi-day-rain';
-    //     case '11d':
-    //       return 'wi wi-day-thunderstorm';
-    //     case '13d':
-    //       return 'wi wi-day-snow';
-    //     case '50d':
-    //       return 'wi wi-day-fog';
-    //     default:
-    //       return 'wi wi-day-sunny';
-    //   }
-    //     };
     
-    return { forecastData, formatDate, getWeatherIcon };
+    
+    return { forecastData, formatDate, getWeatherIcon, backgroundImage };
     },
   };
   </script>
@@ -90,6 +68,7 @@
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: cornflowerblue;
+
 }
 
 @media (max-width: 640px) {

@@ -1,5 +1,6 @@
 <template>
-  <div class="w-full h-full flex flex-col">
+  <div class="w-full h-full flex flex-col MainBg" :style="{ backgroundImage: `url(${backgroundImage}
+  )` }">
     <WeatherHeader/>
     
     <SearchBar class="mt-5"/>
@@ -21,5 +22,19 @@ export default {
     WeatherForecast,
     WeatherHeader
   },
+  setup() {
+    const backgroundImage = require('@/imgs/8YDk.gif');
+    return {
+      backgroundImage
+    }
+  }
 };
 </script>
+<style scoped>
+.MainBg{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+</style>

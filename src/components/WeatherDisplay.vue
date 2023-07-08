@@ -1,10 +1,10 @@
 <template>
     <div class="flex flex-col items-center flex-1 ">
       <div class="flex">
-        <h2 class="text-2xl font-bold mb-4">{{ selectedCity.name }}, {{ selectedCity.country }}, Today</h2>
+        <h2 class="text-5xl mb-4 selectedhead">{{ selectedCity.name }}, {{ selectedCity.country }}, Today</h2>
       </div>
-      <div v-if="weatherData" class="flex flex-1 justify-evenly p-4 w-1/2 h-40  items-center bg-blue-300 border border-blue-200 rounded-lg mr-4 mb-4">
-        <div class="">
+      <div v-if="weatherData" :style="{ backgroundImage: `url(${backgroundImage})` }" class="flex flex-1  justify-evenly p-4 w-1/2 h-40  items-center bg-blue-300 border border-blue-200 rounded-lg mr-4 mb-4 weatherBg">
+        <div class="displayTemp">
           <p class="text-xl font-bold">Temperature: {{ weatherData.current.temp }}°C</p>
           <p class="text-lg font-bold">Feels Like: {{ weatherData.current.feels_like }}°C</p>
           <p class="text-lg font-bold">Sunrise: {{ formattedTime(weatherData.current.sunrise) }}</p>
@@ -29,9 +29,12 @@
   import { computed, onMounted, watch } from 'vue';
   import { useStore } from 'vuex';
   
+  
   export default {
     name: 'WeatherDisplay',
     setup() {
+      const backgroundImage = require('@/imgs/QlQV.gif');
+
       const store = useStore();
       const formattedTime = (timestamp) => {
           const date = new Date(timestamp * 1000); // Convert timestamp to milliseconds
@@ -57,10 +60,24 @@
       store.dispatch('fetchWeatherData');
     });
   
-      return { selectedCity, weatherData,getWeatherIcon, formattedTime };
+      return { selectedCity, weatherData,getWeatherIcon, formattedTime, backgroundImage };
     },
   };
-  </script>
+</script>
 <style scoped>
-
+.weatherBg{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.selectedhead{
+  color: blanchedalmond;
+  font-weight: 900;
+  font-family: cursive;
+}
+.displayTemp{
+  font-family: cursive;
+  color: black;
+  font-weight: 900;
+}
 </style>

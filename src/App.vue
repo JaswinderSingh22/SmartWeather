@@ -13,5 +13,6 @@
   padding: 0;
   background: #b6dee9;
   height: 971px;
+  background-image: url("");
 }
 </style>
